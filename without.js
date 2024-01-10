@@ -19,7 +19,7 @@ const assertArraysEqual = function(arr1, arr2) {
 };
 
 const without = function(source, itemsToRemove) {
-  let updatedArr = source;
+  let updatedArr = source.slice();
   for (let i = 0; i < source.length; i++) {
     if (source.includes(itemsToRemove[i], 0)) {
       let index = source.indexOf(itemsToRemove[i]);
@@ -31,17 +31,12 @@ const without = function(source, itemsToRemove) {
   return updatedArr;
 };
 
-console.log(without([1, 2, 3], [1]));
-console.log(without(["1", "2", "3"], ["3", 2, "4"]));
-console.log(without(["1", "2", "3"], [1, 2, "3"])); // ['1', '2']
-console.log(without([1, 2, 3], [1, 3])); // [2]
-console.log(without(["1", true, "3"], [1, true, "3"])); // ['1]
-console.log(without([], [])); // []
+assertArraysEqual(without([1, 2, 3], [1]));
+assertArraysEqual(without(["1", "2", "3"], ["3", 2, "4"]));
+assertArraysEqual(without(["1", "2", "3"], [1, 2, "3"])); // ['1', '2']
+assertArraysEqual(without([1, 2, 3], [1, 3])); // [2]
+assertArraysEqual(without(["1", true, "3"], [1, true, "3"])); // ['1]
+assertArraysEqual(without([], [])); // []
 
-assertArraysEqual([1, 2, 3], [1]);
-assertArraysEqual(["1", "2", "3"], ["3", 2, "4"]);
-assertArraysEqual(["1", "2", "3"], [1, 2, "3"]); // ['1', '2']
-assertArraysEqual([1, 2, 3], [1, 3]); // [2]
-assertArraysEqual(["1", true, "3"], [1, true, "3"]); // ['1]
-assertArraysEqual([], []); // []
+
 
