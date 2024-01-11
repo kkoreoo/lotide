@@ -25,7 +25,12 @@ const eqObjects = function(object1, object2) {
   for (const key in object1) {
     let objOneValues = object1[key];
     let objTwoValues = object2[key];
-    if (!eqArrays(objOneValues, objTwoValues)) {
+    if (typeof(objOneValues) === 'object' && typeof(objTwoValues) === 'object') {
+      if (!eqArrays(objOneValues, objTwoValues)) {
+        response = false;
+        return response;
+      }
+    } else if (objOneValues !== objTwoValues) {
       response = false;
       return response;
     }
@@ -33,10 +38,10 @@ const eqObjects = function(object1, object2) {
   return response;
 };
 
-const shirtObject = { color: "red", size: "medium" };
-const anotherShirtObject = { size: "medium", color: "red" };
+const shirtObject = { color: 3, size: "medium" };
+const anotherShirtObject = { size: "medium", color: 4 };
 eqObjects(shirtObject , anotherShirtObject); // => true
-assertEqual(eqObjects(shirtObject , anotherShirtObject), true);
+assertEqual(eqObjects(shirtObject , anotherShirtObject), false);
 
 const longSleeveShirtObject = { size: "medium", color: "red", sleeveLength: "long" };
 eqObjects(shirtObject , longSleeveShirtObject); // => false
