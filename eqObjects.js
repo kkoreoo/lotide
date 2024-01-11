@@ -21,21 +21,19 @@ const eqObjects = function(object1, object2) {
   if (Object.keys(object1).length !== Object.keys(object2).length) {
     return false;
   }
-  let response = true;
+  
   for (const key in object1) {
     let objOneValues = object1[key];
     let objTwoValues = object2[key];
     if (Array.isArray(objOneValues) && Array.isArray(objTwoValues)) {
       if (!eqArrays(objOneValues, objTwoValues)) {
-        response = false;
-        return response;
+        return false;
       }
     } else if (objOneValues !== objTwoValues) {
-      response = false;
-      return response;
+      return false;
     }
   }
-  return response;
+  return true;
 };
 
 const shirtObject = { color: 3, size: "medium" };
