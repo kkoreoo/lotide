@@ -1,15 +1,24 @@
+const assert = require('chai').assert;
 const tail = require('../tail');
-const assertEqual = require('../assertEqual');
 
-const arr = ["Hello", "World", "Lighthouse", "Labs"];
-tail(arr);
-assertEqual(tail(arr)[0], "World");
-assertEqual(tail(arr)[2], "Labs");
+describe("#tail", () => {
 
-const arrOne = ["Hello"];
-tail(arrOne);
-assertEqual(tail(arrOne)[0],);
+  it("returns 'World' as the first index and 'Labs' as the last index for ['Hello', 'World', 'Lighthouse', 'Labs']", () => {
+    const arr = ["Hello", "World", "Lighthouse", "Labs"];
+    let result = tail(arr);
+    assert.strictEqual(result[0], "World");
+    assert.strictEqual(result[2], "Labs");
+  });
 
-const arrEmpty = [];
-tail(arrEmpty);
-assertEqual(tail(arrEmpty)[0],);
+  it("returns undefined for ['Hello']", () => {
+    const arrOne = ["Hello"];
+    let result = tail(arrOne);
+    assert.strictEqual(result[0], undefined);
+  });
+
+  it("returns undefined for []", () => {
+    const arrEmpty = [];
+    let result = tail(arrEmpty);
+    assert.strictEqual(result[0], undefined);
+  });
+})
