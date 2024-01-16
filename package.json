@@ -1,8 +1,8 @@
 {
-  "name": "lotide",
-  "version": "1.0.0",
-  "description": "",
-  "main": "assertArraysEqual.js",
+  "name": "@kkoreoo/lotide",
+  "version": "1.0.1",
+  "description": "an educational version of lodash!",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
@@ -19,7 +19,7 @@
     "type": "git",
     "url": "git+https://github.com/kkoreoo/lotide.git"
   },
-  "author": "",
+  "author": "Alex Le",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/kkoreoo/lotide/issues"
