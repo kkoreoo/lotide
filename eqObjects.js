@@ -25,12 +25,24 @@ const eqObjects = function(object1, object2) {
   for (const key in object1) {
     let objOneValues = object1[key];
     let objTwoValues = object2[key];
+
+    // if the value is an array
     if (Array.isArray(objOneValues) && Array.isArray(objTwoValues)) {
-      if (!eqArrays(objOneValues, objTwoValues)) {
+    // if the value is an object
+    } else if (typeof(objOneValues) === "object" && typeof(objTwoValues) === "object") {
+      // assessing to see if the objects have the same # of properties
+      if (Object.keys(objOneValues).length !== Object.keys(objTwoValues).length) {
         return false;
       }
+
+      eqObjects(objOneValues, objTwoValues);
+
+    } else if (!eqArrays(objOneValues, objTwoValues)) {
+        return false;
+
     } else if (objOneValues !== objTwoValues) {
       return false;
+
     }
   }
   return true;
@@ -53,7 +65,7 @@ assertEqual(eqObjects(multiColorShirtObject  , anotherMultiColorShirtObject), tr
 const longSleeveMultiColorShirtObject = { size: "medium", colors: ["red", "blue"], sleeveLength: "long" };
 assertEqual(eqObjects(multiColorShirtObject  , longSleeveMultiColorShirtObject), false); // => false
 
-assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 })); // => true
+assertEqual(eqObjects({ a: { z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), true); // => true
 
-assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 })); // => false
-assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 })); // => false
+assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: { z: 1 }, b: 2 }), false ); // => false
+assertEqual(eqObjects({ a: { y: 0, z: 1 }, b: 2 }, { a: 1, b: 2 }), false); // => false
